@@ -3984,7 +3984,7 @@ Attack = function()
         task.spawn(function()
             while task.wait() do
                 if  _G["Fast Attack"] then
-                        task.wait(-0.1)
+                        task.wait()
                         b = 4
                     end
                     pcall(function()
@@ -3992,7 +3992,7 @@ Attack = function()
                             if v.Humanoid.Health > 0 then
                                 if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 40 then
                                     Attack()
-                                    task.wait(-0.1)
+                                    task.wait()
                                     Boost()
                                 end
                             end
@@ -4005,7 +4005,7 @@ Attack = function()
         task.spawn(function()
             while task.wait() do
                 if  _G["Fast Attack"] then
-                       task.wait(-0.1)
+                       task.wait()
                        k = 4
                     end
                     pcall(function()
@@ -4013,7 +4013,7 @@ Attack = function()
                             if v.Humanoid.Health > 0 then
                                 if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 40 then
                                     Attack()
-                               task.wait(-0.1)
+                               task.wait()
                                 Unboost()
                                 end
                             end
@@ -6057,6 +6057,10 @@ Tab5.Button({
 	end,
 })
 
+Tab6.Label({
+		Title = "Status : Soon ..."
+	})
+
 -- [[ Esp String ]]
 
 getgenv().ESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/ErenYeaker/SaveScript/main/ESP.lua"))()
@@ -6512,7 +6516,7 @@ end
 
 task.spawn(function()
 	while task.wait() do
-		if _G.Settings.Misc['Auto Rejoin'] == false then
+		if _G.Settings.Misc['Auto Rejoin'] == true then
 			_G.Settings.Misc['Auto Rejoin'] = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
 				if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
 					print("Unique | Rejoin!")
