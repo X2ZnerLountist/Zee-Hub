@@ -183,7 +183,7 @@ _G.Settings = {
 
 	HUD = {
 		["FPS"] = 60,
-		["LockFPS"] = true,
+		["LockFPS"] = false,
 		["Boost FPS Windows"] = false,
 		["White Screen"] = false,
 	},
@@ -6512,7 +6512,7 @@ end
 
 task.spawn(function()
 	while task.wait() do
-		if _G.Settings.Misc['Auto Rejoin'] == false then
+		if _G.Settings.Misc['Auto Rejoin'] then
 			_G.Settings.Misc['Auto Rejoin'] = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
 				if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
 					print("Unique | Rejoin!")
