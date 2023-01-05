@@ -3975,7 +3975,7 @@ Attack = function()
         if _G["Fast Attack"] then
             task.spawn(function()
                     ac:attack()
-                    cdnormal = 2
+                    cdnormal = 4
                 end)
             end
         end
@@ -3985,7 +3985,7 @@ Attack = function()
             while task.wait() do
                 if  _G["Fast Attack"] then
                         task.wait(-0.1)
-                        b = 2
+                        b = 4
                     end
                     pcall(function()
                         for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
@@ -4006,7 +4006,7 @@ Attack = function()
             while task.wait() do
                 if  _G["Fast Attack"] then
                        task.wait(-0.1)
-                       k = 2
+                       k = 4
                     end
                     pcall(function()
                         for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
@@ -6512,7 +6512,7 @@ end
 
 task.spawn(function()
 	while task.wait() do
-		if _G.Settings.Misc['Auto Rejoin'] then
+		if _G.Settings.Misc['Auto Rejoin'] == false then
 			_G.Settings.Misc['Auto Rejoin'] = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
 				if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
 					print("Unique | Rejoin!")
