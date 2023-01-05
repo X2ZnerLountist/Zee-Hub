@@ -6061,16 +6061,270 @@ Tab6.Label({
 		Title = "Status : Soon ..."
 	})
 
--- [[ Esp String ]]
+-- [[ Esp Function ]]
 
-getgenv().ESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/ErenYeaker/SaveScript/main/ESP.lua"))()
-
-Tab7.Toggle({Title = "Esp Player",
-    Default = nil,
-    callback = function(a)
-    getgenv().ESP:Toggle(a)
+function isnil(thing)
+return (thing == nil)
 end
+local function round(n)
+return math.floor(tonumber(n) + 0.5)
+end
+Number = math.random(1, 1000000)
+function UpdateEspPlayer()
+for i,v in pairs(game:GetService'Players':GetChildren()) do
+pcall(function()
+ if not isnil(v.Character) then
+ if ESPPlayer then
+ if not isnil(v.Character.Head) and not v.Character.Head:FindFirstChild('NameEsp'..Number) then
+ local bill = Instance.new('BillboardGui',v.Character.Head)
+ bill.Name = 'NameEsp'..Number
+ bill.ExtentsOffset = Vector3.new(0, 1, 0)
+ bill.Size = UDim2.new(1,200,1,30)
+ bill.Adornee = v.Character.Head
+ bill.AlwaysOnTop = true
+ local name = Instance.new('TextLabel',bill)
+ name.Font = "GothamBold"
+ name.FontSize = "Size14"
+ name.TextWrapped = true
+ name.Text = (v.Name ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Character.Head.Position).Magnitude/3) ..' M')
+ name.Size = UDim2.new(1,0,1,0)
+ name.TextYAlignment = 'Top'
+ name.BackgroundTransparency = 1
+ name.TextStrokeTransparency = 0.5
+ if v.Team == game:GetService("Teams").Pirates then
+ name.TextColor3 = Color3.new(255,0,0)
+ else
+  name.TextColor3 = Color3.new(0,255,255)
+ end
+ else
+  v.Character.Head['NameEsp'..Number].TextLabel.Text = (v.Name ..' | '.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Character.Head.Position).Magnitude/3) ..' M\nHealth : ' .. round(v.Character.Humanoid.Health*100/v.Character.Humanoid.MaxHealth) .. '%')
+ end
+ else
+  if v.Character.Head:FindFirstChild('NameEsp'..Number) then
+ v.Character.Head:FindFirstChild('NameEsp'..Number):Destroy()
+ end
+ end
+ end
+ end)
+end
+end
+
+function UpdateIslandESP()
+for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].Locations:GetChildren()) do
+pcall(function()
+ if IslandESP then
+ if v.Name ~= "Sea" then
+ if not v:FindFirstChild('NameEsp') then
+ local bill = Instance.new('BillboardGui',v)
+ bill.Name = 'NameEsp'
+ bill.ExtentsOffset = Vector3.new(0, 1, 0)
+ bill.Size = UDim2.new(1,200,1,30)
+ bill.Adornee = v
+ bill.AlwaysOnTop = true
+ local name = Instance.new('TextLabel',bill)
+ name.Font = "GothamBold"
+ name.FontSize = "Size14"
+ name.TextWrapped = true
+ name.Size = UDim2.new(1,0,1,0)
+ name.TextYAlignment = 'Top'
+ name.BackgroundTransparency = 1
+ name.TextStrokeTransparency = 0.5
+ name.TextColor3 = Color3.fromRGB(80, 245, 245)
+ else
+  v['NameEsp'].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' M')
+ end
+ end
+ else
+  if v:FindFirstChild('NameEsp') then
+ v:FindFirstChild('NameEsp'):Destroy()
+ end
+ end
+ end)
+end
+end
+
+function UpdateChestEsp()
+for i,v in pairs(game.Workspace:GetChildren()) do
+pcall(function()
+ if v.Name == "Chest1" or v.Name == "Chest2" or v.Name == "Chest3" then
+ if ChestESP then
+ if (v.Name == "Chest1" or v.Name == "Chest2" or v.Name == "Chest3") and (v.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 60000 then
+ if not v:FindFirstChild("ChestESP"..Number) then
+ local Bb = Instance.new("BillboardGui", v)
+ Bb.Name = "ChestESP"..Number
+ Bb.ExtentsOffset = Vector3.new(0, 1, 0)
+ Bb.Size = UDim2.new(1, 200, 1, 30)
+ Bb.Adornee = v
+ Bb.AlwaysOnTop = true
+ local Textlb = Instance.new("TextLabel", Bb)
+ Textlb.Font = "GothamBold"
+ Textlb.FontSize = "Size14"
+ Textlb.Size = UDim2.new(1,0,1,0)
+ Textlb.BackgroundTransparency = 1
+ Textlb.TextStrokeTransparency = 0.5
+ if v.Name == "Chest1" then
+ Textlb.TextColor3 = Color3.fromRGB(174, 123, 47)
+ Textlb.Text = "Bronze Chest".."\n"..math.round((v.Position - game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position).Magnitude/3).." m."
+ end
+ if v.Name == "Chest2" then
+ Textlb.TextColor3 = Color3.fromRGB(255, 255, 127)
+ Textlb.Text = "Gold Chest".."\n"..math.round((v.Position - game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position).Magnitude/3).." m."
+ end
+ if v.Name == "Chest3" then
+ Textlb.Text = "Diamond Chest".."\n"..math.round((v.Position - game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position).Magnitude/3).." m."
+ Textlb.TextColor3 = Color3.fromRGB(5, 243, 255)
+ end
+ else
+  v["ChestESP"..Number].TextLabel.Text = v.Name.."\n"..math.round((v.Position - game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position).Magnitude/3).." m."
+ end
+ end
+ else
+  if v:FindFirstChild("ChestESP"..Number) then
+ v:FindFirstChild("ChestESP"..Number):Destroy()
+ end
+ end
+ end
+ end)
+end
+end
+
+function UpdateBfEsp()
+for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+pcall(function()
+ if DevilFruitESP then
+ if string.find(v.Name, "Fruit") then
+ if not v.Handle:FindFirstChild('NameEsp'..Number) then
+ local bill = Instance.new('BillboardGui',v.Handle)
+ bill.Name = 'NameEsp'..Number
+ bill.ExtentsOffset = Vector3.new(0, 1, 0)
+ bill.Size = UDim2.new(1,200,1,30)
+ bill.Adornee = v.Handle
+ bill.AlwaysOnTop = true
+ local name = Instance.new('TextLabel',bill)
+ name.Font = "GothamBold"
+ name.FontSize = "Size14"
+ name.TextWrapped = true
+ name.Size = UDim2.new(1,0,1,0)
+ name.TextYAlignment = 'Top'
+ name.BackgroundTransparency = 1
+ name.TextStrokeTransparency = 0.5
+ name.TextColor3 = Color3.fromRGB(255, 0, 0)
+ name.Text = (v.Name ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Handle.Position).Magnitude/3) ..' M')
+ else
+  v.Handle['NameEsp'..Number].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Handle.Position).Magnitude/3) ..' M')
+ end
+ end
+ else
+  if v.Handle:FindFirstChild('NameEsp'..Number) then
+ v.Handle:FindFirstChild('NameEsp'..Number):Destroy()
+ end
+ end
+ end)
+end
+end
+
+function UpdateFlowerEsp()
+for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+pcall(function()
+ if v.Name == "Flower2" or v.Name == "Flower1" then
+ if FlowerESP then
+ if not v:FindFirstChild('NameEsp'..Number) then
+ local bill = Instance.new('BillboardGui',v)
+ bill.Name = 'NameEsp'..Number
+ bill.ExtentsOffset = Vector3.new(0, 1, 0)
+ bill.Size = UDim2.new(1,200,1,30)
+ bill.Adornee = v
+ bill.AlwaysOnTop = true
+ local name = Instance.new('TextLabel',bill)
+ name.Font = "GothamBold"
+ name.FontSize = "Size14"
+ name.TextWrapped = true
+ name.Size = UDim2.new(1,0,1,0)
+ name.TextYAlignment = 'Top'
+ name.BackgroundTransparency = 1
+ name.TextStrokeTransparency = 0.5
+ name.TextColor3 = Color3.fromRGB(255, 0, 0)
+ if v.Name == "Flower1" then
+ name.Text = ("Blue Flower" ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' M')
+ name.TextColor3 = Color3.fromRGB(255, 0, 0)
+ end
+ if v.Name == "Flower2" then
+ name.Text = ("Red Flower" ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' M')
+ name.TextColor3 = Color3.fromRGB(255, 0, 0)
+ end
+ else
+  v['NameEsp'..Number].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' M')
+ end
+ else
+  if v:FindFirstChild('NameEsp'..Number) then
+ v:FindFirstChild('NameEsp'..Number):Destroy()
+ end
+ end
+ end
+ end)
+end
+end
+
+Tab7.Label({Title = "Esp"})
+
+Tab7.Toggle({
+	Title = "Esp Player",
+	Default = false,
+	callback = function(value)
+	    ESPPlayer = value
+		while ESPPlayer do wait()
+		    UpdateEspPlayer()
+		end
+	end,
 })
+
+Tab7.Toggle({
+	Title = "Esp Chest",
+	Default = false,
+	callback = function(value)
+	    ChestESP = value
+		while ChestESP do wait()
+		    UpdateChestEsp()
+		end
+	end,
+})
+
+Tab7.Toggle({
+	Title = "Esp Fruit",
+	Default = false,
+	callback = function(value)
+	    DevilFruitESP = value
+		while DevilFruitESP do wait()
+		    UpdateBfEsp()
+		end
+	end,
+})
+
+if World2 then
+    Tab7.Toggle({
+	Title = "Esp Fruit",
+	Default = false,
+	callback = function(value)
+	    FlowerESP = value
+		while FlowerESP do wait()
+		    UpdateFlowerEsp()
+		end
+	end,
+})
+end
+
+Tab7.Toggle({
+	Title = "Esp Island",
+	Default = false,
+	callback = function(value)
+	    IslandESP = value
+		while IslandESP do wait()
+		    UpdateIslandESP()
+		end
+	end,
+})
+
+Tab7.Label({Title = "Raid",})
 
 Tab7.Toggle({
 	Title = "Auto Raids",
@@ -6516,7 +6770,7 @@ end
 
 task.spawn(function()
 	while task.wait() do
-		if _G.Settings.Misc['Auto Rejoin'] == false then
+		if _G.Settings.Misc['Auto Rejoin'] == true then
 			_G.Settings.Misc['Auto Rejoin'] = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
 				if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
 					print("Unique | Rejoin!")
