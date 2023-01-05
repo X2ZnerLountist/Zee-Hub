@@ -6516,7 +6516,7 @@ end
 
 task.spawn(function()
 	while task.wait() do
-		if _G.Settings.Misc['Auto Rejoin'] == true then
+		if _G.Settings.Misc['Auto Rejoin'] == false then
 			_G.Settings.Misc['Auto Rejoin'] = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
 				if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
 					print("Unique | Rejoin!")
