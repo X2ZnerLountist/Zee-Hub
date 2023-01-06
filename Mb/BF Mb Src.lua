@@ -3975,7 +3975,7 @@ Attack = function()
         if _G["Fast Attack"] then
             task.spawn(function()
                     ac:attack()
-                    cdnormal = 4
+                    cdnormal = 5
                 end)
             end
         end
@@ -3985,7 +3985,7 @@ Attack = function()
             while task.wait() do
                 if  _G["Fast Attack"] then
                         task.wait()
-                        b = 4
+                        b = 5
                     end
                     pcall(function()
                         for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
@@ -4006,7 +4006,7 @@ Attack = function()
             while task.wait() do
                 if  _G["Fast Attack"] then
                        task.wait()
-                       k = 4
+                       k = 5
                     end
                     pcall(function()
                         for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
