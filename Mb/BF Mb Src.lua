@@ -3910,7 +3910,6 @@ Tab1.Toggle({Title = "Fast Attack",
     end,
 })
 
---[[
 local SeraphFrame = debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts:WaitForChild("CombatFramework")))[2]
 local VirtualUser = game:GetService("VirtualUser")
 local RigControllerR = debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework.RigController))[2]
@@ -3947,8 +3946,9 @@ function getHits(Size)
 end
             
 task.spawn(function()
+    while task.wait() do
+         if  _G["Fast Attack"] then
     repeat task.wait()
-    if  _G["Fast Attack"] then
         if SeraphFrame.activeController then
             SeraphFrame.activeController.timeToNextAttack = -math.huge
             SeraphFrame.activeController.focusStart = math.huge
@@ -3956,13 +3956,20 @@ task.spawn(function()
             SeraphFrame.activeController.humanoid.AutoRotate = true
             SeraphFrame.activeController.increment = math.huge
         end
-    end
     until not _G["Fast Attack"]
+end
+end
 end)
             
 function Boost()
     task.spawn(function()
         game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(SeraphFuckWeapon()))
+    end)
+end
+
+function Unboost()
+    spawn(function()
+        game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("unequipWeapon",tostring(SeraphFuckWeapon()))
     end)
 end
             
@@ -3972,32 +3979,36 @@ Attack = function()
         if _G["Fast Attack"] then
             task.spawn(function()
             ac:attack()
-            cdnormal = math.huge
+            cdnormal = 0
         end)
     end
 end
             
         
 task.spawn(function()
-    while task.wait(-0.001) do
+    while task.wait() do
+        if  _G["Fast Attack"] then
     repeat task.wait()
-    if  _G["Fast Attack"] then
         task.wait()
-        b = math.huge
-    end
+        b = 0
     pcall(function()
         for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
             if v.Humanoid.Health > 0 then
                 if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 40 then
                     Attack()
-                    task.wait()
+                    Attack()
+                    Attack()
+                    Attack()
+                    Attack()
                     Boost()
                     task.wait()
+                    Boost()
                 end
             end
         end
     end)
     until not _G["Fast Attack"]
+    end
     end
 end)
             
@@ -4075,8 +4086,8 @@ CombatFrameworkR = require(game:GetService("Players").LocalPlayer.PlayerScripts.
 y = debug.getupvalues(CombatFrameworkR)[2]
 task.spawn(function()
     while task.wait() do
-    repeat task.wait()
         if _G["Fast Attack"] then
+    repeat task.wait()
             if typeof(y) == "table" then
                 pcall(function()
                     CameraShaker:Stop()
@@ -4091,79 +4102,10 @@ task.spawn(function()
                     y.activeController.humanoid.AutoRotate = true
                 end)
             end
-        end
-    until not _G["Fast Attack"]
-    end
- end) --]]
- 
- local plr = game.Players.LocalPlayer
-
-local CbFw = debug.getupvalues(require(plr.PlayerScripts.CombatFramework))
-local CbFw2 = CbFw[2]
-
-function GetCurrentBlade() 
-    local p13 = CbFw2.activeController
-    local ret = p13.blades[1]
-    if not ret then return end
-    while ret.Parent~=game.Players.LocalPlayer.Character do ret=ret.Parent end
-    return ret
-end
-function AttackNoCD() 
-    local AC = CbFw2.activeController
-        local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
-            plr.Character,
-            {plr.Character.HumanoidRootPart},
-            40
-            )
-        local cac = {}
-        local hash = {}
-        for k, v in pairs(bladehit) do
-            if v.Parent:FindFirstChild("HumanoidRootPart") and not hash[v.Parent] then
-                table.insert(cac, v.Parent.HumanoidRootPart)
-                hash[v.Parent] = true
-            end
-        end
-        bladehit = cac
-        if #bladehit > 0 then
-            local u8 = debug.getupvalue(AC.attack, 5)
-            local u9 = debug.getupvalue(AC.attack, 6)
-            local u7 = debug.getupvalue(AC.attack, 4)
-            local u10 = debug.getupvalue(AC.attack, 7)
-            local u12 = (u8 * 798405 + u7 * 727595) % u9
-            local u13 = u7 * 798405
-            (function()
-                u12 = (u12 * u9 + u13) % 1099511627776
-                u8 = math.floor(u12 / u9)
-                u7 = u12 - u8 * u9
-            end)()
-            u10 = u10 + 1
-            debug.setupvalue(AC.attack, 5, u8)
-            debug.setupvalue(AC.attack, 6, u9)
-            debug.setupvalue(AC.attack, 4, u7)
-            debug.setupvalue(AC.attack, 7, u10)
-            pcall(function()
-                for k, v in pairs(AC.animator.anims.basic) do
-                    v:Play(0.01,0.01,0.01)
-                end                  
-            end)
-            if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then 
-                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
-                game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
-                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "") 
-            end
-        end
-    end
-
-spawn(function()
-    while task.wait(3) do task.wait()
-        if _G["Fast Attack"] then
-            task.wait()
-        repeat task.wait()
-            AttackNoCD()
             until not _G["Fast Attack"]
         end
     end
-end) 
+ end)
 
 local Weapon = {
     "Malee",
