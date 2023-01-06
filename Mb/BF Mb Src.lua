@@ -3994,7 +3994,7 @@ Attack = function()
                             if v.Humanoid.Health > 0 then
                                 if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 40 then
                                     Attack()
-                                    task.wait()
+                                    task.wait(.01)
                                     Boost()
                                 end
                             end
@@ -4014,7 +4014,7 @@ Attack = function()
                         for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
                             if v.Humanoid.Health > 0 then
                                 if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 40 then
-                               task.wait()
+                               task.wait(.01)
                                 Unboost()
                                 end
                             end
