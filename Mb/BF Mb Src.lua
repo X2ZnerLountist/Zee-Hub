@@ -3947,18 +3947,16 @@ end
             
 task.spawn(function()
     while task.wait() do
-         if  _G["Fast Attack"] then
-    repeat task.wait()
-        if SeraphFrame.activeController then
-            SeraphFrame.activeController.timeToNextAttack = -math.huge
-            SeraphFrame.activeController.focusStart = math.huge
-            SeraphFrame.activeController.hitboxMagnitude = math.huge
-            SeraphFrame.activeController.humanoid.AutoRotate = true
-            SeraphFrame.activeController.increment = math.huge
+        if  _G["Fast Attack"] then
+            if SeraphFrame.activeController then
+                SeraphFrame.activeController.timeToNextAttack = -math.huge
+                SeraphFrame.activeController.focusStart = math.huge
+                SeraphFrame.activeController.hitboxMagnitude = math.huge
+                SeraphFrame.activeController.humanoid.AutoRotate = true
+                SeraphFrame.activeController.increment = math.huge
+            end
         end
-    until not _G["Fast Attack"]
-end
-end
+    end
 end)
             
 function Boost()
@@ -3966,9 +3964,9 @@ function Boost()
         game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(SeraphFuckWeapon()))
     end)
 end
-
+            
 function Unboost()
-    spawn(function()
+    task.spawn(function()
         game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("unequipWeapon",tostring(SeraphFuckWeapon()))
     end)
 end
@@ -3976,39 +3974,54 @@ end
 local Animation = Instance.new("Animation")
 Attack = function()
     local ac = SeraphFrame.activeController
-        if _G["Fast Attack"] then
+        if ac and ac.equipped then
             task.spawn(function()
-            ac:attack()
-            cdnormal = 0
-        end)
-    end
-end
-            
-        
-task.spawn(function()
-    while task.wait() do
-        if  _G["Fast Attack"] then
-    repeat task.wait()
-        task.wait()
-        b = 0
-    pcall(function()
-        for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
-            if v.Humanoid.Health > 0 then
-                if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 40 then
-                    Attack()
-                    Attack()
-                    Attack()
-                    Attack()
-                    Attack()
-                    Boost()
-                end
+                    ac:attack()
+                    cdnormal = 1
+                end)
             end
         end
-    end)
-    until not _G["Fast Attack"]
-    end
-    end
-end)
+            
+        
+        task.spawn(function()
+            while task.wait() do
+                if  _G["Fast Attack"] then
+                        task.wait()
+                        b = 1
+                    end
+                    pcall(function()
+                        for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
+                            if v.Humanoid.Health > 0 then
+                                if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 40 then
+                                    Attack()
+                                    task.wait()
+                                    Boost()
+                                end
+                            end
+                        end
+                    end)
+            end
+        end)
+            
+        
+        task.spawn(function()
+            while task.wait() do
+                if  _G["Fast Attack"] then
+                       task.wait()
+                       k = 1
+                    end
+                    pcall(function()
+                        for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
+                            if v.Humanoid.Health > 0 then
+                                if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 40 then
+                               task.wait()
+                                Unboost()
+                                end
+                            end
+                        end
+                    end)
+            end
+        end)
             
         tjw1 = true
         task.spawn(function()
@@ -4085,7 +4098,6 @@ y = debug.getupvalues(CombatFrameworkR)[2]
 task.spawn(function()
     while task.wait() do
         if _G["Fast Attack"] then
-    repeat task.wait()
             if typeof(y) == "table" then
                 pcall(function()
                     CameraShaker:Stop()
@@ -4100,10 +4112,9 @@ task.spawn(function()
                     y.activeController.humanoid.AutoRotate = true
                 end)
             end
-            until not _G["Fast Attack"]
         end
     end
- end)
+end) 
 
 local Weapon = {
     "Malee",
