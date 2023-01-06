@@ -4001,8 +4001,6 @@ task.spawn(function()
                     Attack()
                     Attack()
                     Boost()
-                    task.wait()
-                    Boost()
                 end
             end
         end
