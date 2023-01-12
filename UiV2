@@ -152,7 +152,7 @@ function Blacklib:Window()
     Space2.Size = UDim2.new(0, 10, 0, 25)
     Space2.Font = Enum.Font.GothamBold
     Space2.Text = "|"
-    Space2.TextColor3 = Color3.fromRGB(0,150,0)
+    Space2.TextColor3 = Color3.fromRGB(255,255,255)
     Space2.TextSize = 18.000
     
     Pinged.Name = "Pinged"
