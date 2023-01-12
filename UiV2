@@ -881,7 +881,7 @@ function Blacklib:Window()
                 if default == true then
                     ImageButton.ImageRectOffset = Vector2.new(4, 836)
                     game.TweenService:Create(ImageButton, TweenInfo.new(0.08, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut),
-                        {ImageColor3 = Color3.fromRGB(0,255,0)}
+                        {ImageColor3 = Color3.fromRGB(255,255,255)}
                         ):Play()
                     toggle = not toggle
                     pcall(callback, toggle)
@@ -890,7 +890,7 @@ function Blacklib:Window()
                 ImageButton.MouseButton1Click:Connect(function()
                     if toggle == false then
                         game.TweenService:Create(ImageButton, TweenInfo.new(0.08, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut),
-                            {ImageColor3 = Color3.fromRGB(0,255,0)}
+                            {ImageColor3 = Color3.fromRGB(255,255,255)}
                             ):Play()
                         ImageButton.ImageRectOffset = Vector2.new(4, 836)
                     else
@@ -1084,7 +1084,7 @@ function Blacklib:Window()
                             {Rotation = 0}
                             ):Play()
                         game.TweenService:Create(ImageButton, TweenInfo.new(0.08, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut),
-                            {ImageColor3 = Color3.fromRGB(0,255,0)}
+                            {ImageColor3 = Color3.fromRGB(255,255,255)}
                             ):Play()
                     end
                 end)
@@ -1105,7 +1105,7 @@ function Blacklib:Window()
                     
                     ItemList.Name = "ItemList"
                     ItemList.Parent = DropItemScroll
-                    ItemList.BackgroundColor3 = Color3.fromRGB(0,255,0)
+                    ItemList.BackgroundColor3 = Color3.fromRGB(255,255,255)
                     ItemList.BackgroundTransparency = 1.000
                     ItemList.Size = UDim2.new(0, 375, 0, 30)
                     ItemList.AutoButtonColor = false
@@ -1180,7 +1180,7 @@ function Blacklib:Window()
                     local ItemList = Instance.new("TextButton")
                     ItemList.Name = "ItemList"
                     ItemList.Parent = DropItemScroll
-                    ItemList.BackgroundColor3 = Color3.fromRGB(0,255,0)
+                    ItemList.BackgroundColor3 = Color3.fromRGB(255,255,255)
                     ItemList.BackgroundTransparency = 1.000
                     ItemList.Size = UDim2.new(0, 375, 0, 30)
                     ItemList.AutoButtonColor = false
