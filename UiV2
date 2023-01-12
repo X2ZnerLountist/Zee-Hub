@@ -25,7 +25,7 @@ _G.TabThemeColor = Color3.fromRGB(250, 0, 0)
 _G.SectionColor = Color3.fromRGB(255, 255, 255)
 _G.SectionImageColor = Color3.fromRGB(255, 255, 255)
 _G.SectionTextColor = Color3.fromRGB(255, 255, 255)
-_G.SectionOn = Color3.fromRGB(0, 250, 0)
+_G.SectionOn = Color3.fromRGB(255, 255, 255)
 
 
 function Blacklib:Window()
