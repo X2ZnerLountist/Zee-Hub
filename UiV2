@@ -109,7 +109,7 @@ function Blacklib:Window()
     BlackImage.BackgroundTransparency = 1.000
     BlackImage.Position = UDim2.new(0, 3, 0, 3)
     BlackImage.Size = UDim2.new(0, 25, 0, 25)
-    BlackImage.Image = "rbxassetid://8666601749"
+    BlackImage.Image = "rbxassetid://12103905026"
     BlackImage.ImageColor3 = Color3.fromRGB(0,220,0)
     
     BlackTitle.Name = "BlackTitle"
@@ -351,7 +351,7 @@ function Blacklib:Window()
     end)
     spawn(function()
         while task.wait() do
-            titlefunc:Refresh("") wait(.2) titlefunc:Refresh("Z") wait(.2) titlefunc:Refresh("Ze") wait(.2) titlefunc:Refresh("Zee") wait(.2) titlefunc:Refresh("Zee H") wait(.2) titlefunc:Refresh("") wait(.2) titlefunc:Refresh("Zee Hu") wait(.2) titlefunc:Refresh("Zee hub") wait(.2) titlefunc:Refresh("Zee Hu") wait(.2) titlefunc:Refresh("Zee H") wait(.9) titlefunc:Refresh("Zee ") wait(.2) titlefunc:Refresh("Ze") wait(.2) titlefunc:Refresh("Z") wait(.2) titlefunc:Refresh("") wait(.2) wait(.3)
+            titlefunc:Refresh("") wait(.2) titlefunc:Refresh("Z") wait(.2) titlefunc:Refresh("Ze") wait(.2) titlefunc:Refresh("Zee") wait(.2) titlefunc:Refresh("Zee H") wait(.2) titlefunc:Refresh("Zee Hu") wait(.2) titlefunc:Refresh("Zee Hub") wait(.2) titlefunc:Refresh("Zee Hu") wait(.2) titlefunc:Refresh("Zee H") wait(.9) titlefunc:Refresh("Zee ") wait(.2) titlefunc:Refresh("Ze") wait(.2) titlefunc:Refresh("Z") wait(.2) titlefunc:Refresh("") wait(.2) wait(.3)
         end
     end)
     -- End Windows --
@@ -1881,4 +1881,3 @@ function Blacklib:Window()
     return Tabs
 end
 return Blacklib
-
