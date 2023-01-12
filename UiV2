@@ -528,7 +528,7 @@ function Blacklib:Window()
         TabImage.Position = UDim2.new(0, 3, 0, 4)
         TabImage.Size = UDim2.new(0, 20, 0, 20)
         TabImage.Image = img or "rbxassetid://8666601749"
-        TabImage.ImageColor3 = Color3.fromRGB(200,200,200)
+        TabImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
         
         TabTitle.Name = tabtitle or "TabTitle"
         TabTitle.Parent = TabFrame
@@ -1376,7 +1376,7 @@ function Blacklib:Window()
                 SliderBox.ClearTextOnFocus = false
                 SliderBox.Font = Enum.Font.Code
                 SliderBox.Text = tostring(start and math.floor((start / max) * (max - min) + min) or 0)
-                SliderBox.TextColor3 = Color3.fromRGB(200,200,200)
+                SliderBox.TextColor3 = Color3.fromRGB(255, 255, 255)
                 SliderBox.TextSize = 10.000
                 SliderBox.TextTransparency = 0
                 SliderBox.TextXAlignment = Enum.TextXAlignment.Center
@@ -1865,7 +1865,7 @@ function Blacklib:Window()
                 
                 Frame2.Name = "Line"
                 Frame2.Parent = sectionFrame
-                Frame2.BackgroundColor3 = Color3.fromRGB(200,200,200)
+                Frame2.BackgroundColor3 = Color3.fromRGB(255,255,255)
                 Frame2.BorderSizePixel = 0
                 Frame2.Position = UDim2.new(0, 8, 0, 1)
                 Frame2.Size = UDim2.new(0, 371, 0, 1)
